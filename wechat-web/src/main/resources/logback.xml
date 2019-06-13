@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+    <contextName>${HOSTNAME}</contextName>
+    <!-- 设置日志输出根目录 -->
+    <property name="log.dir" value="log"/>
+    <property name="encoding" value="UTF-8"/>
+    <property name="normal-pattern" value="%d{yyyy-MM-dd HH:mm:ss:SSS} %-5level - [%thread] - %logger %C.%M:%L [%X{traceId}] %msg%n"/>
+    <property name="plain-pattern" value="%d{yyyy-MM-dd HH:mm:ss} %msg%n"/>
+
+    <!-- log file default -->
+    <appender name="main" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${log.dir}/main.log</File>
+        <prudent>false</prudent>
+        <Append>true</Append>
+        <encoder>
+            <pattern>${normal-pattern}</pattern>
+            <charset>${encoding}</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.dir}/main.log.%d{yyyy-MM-dd-HH}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <!-- log file error -->
+    <appender name="error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <prudent>false</prudent>
+        <Append>true</Append>
+        <encoder>
+            <pattern>${normal-pattern}</pattern>
+            <charset>${encoding}</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log.dir}/error.log.%d{yyyy-MM-dd-HH}</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${normal-pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="error.log" level="ERROR" additivity="false">
+        <appender-ref ref="error"/>
+        <appender-ref ref="main"/>
+        <appender-ref ref="console"/>
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="console"/>
+        <appender-ref ref="main"/>
+    </root>
+</configuration>
