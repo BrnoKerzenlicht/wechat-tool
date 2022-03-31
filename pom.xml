@@ -23,7 +23,7 @@
     <properties>
         <java.version>1.8</java.version>
         <maven-compiler.version>3.1</maven-compiler.version>
-        <sprint-boot-starter.version>2.0.3.RELEASE</sprint-boot-starter.version>
+        <sprint-boot-starter.version>2.5.12</sprint-boot-starter.version>
         <nsip-component-common.version>1.0.0-RELEASE</nsip-component-common.version>
         <wechat-api.version>1.0.0-RELEASE</wechat-api.version>
         <slf4j.version>1.7.25</slf4j.version>
